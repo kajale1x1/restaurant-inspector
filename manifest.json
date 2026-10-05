@@ -1,0 +1,8 @@
+{
+    "manifest_version" : 3,
+    "name" : "Restaurant Inspector",
+    "version" : "1.0",
+    "description" : "Injects health inspection grades and data into restaurant pages",
+    "content_scripts" : [ {"matches" : ["*://*.yelp.com/biz/*"],"js" : ["content.js"]}],
+    "web_accessible_resources": [{"resources": ["restaurant_inspection.json","Inspectionpopup.js"],"matches": ["*://*.yelp.com/*"]}]
+}
