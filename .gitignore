@@ -5,8 +5,4 @@ Thumbs.db
 # Environment variables or secrets (if added in the future)
 .env
 *.pem
-# Ignore local datasets
-restaurant_inspection.json
-*.json
-!manifest.json
-!package.json
+
