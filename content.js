@@ -117,6 +117,43 @@ function filtermatch(yelpaddress, dataset) {
   return matches || null;
 }
 
+function findalloptions(yelpAddress,dataset,yelpName)
+{
+  if(!yelpAddress || !Array.isArray(dataset)) return null;
+  const matches = dataset.filter(record => record.full_address === yelpAddress)
+  
+  const distinct_names = [...new Set(matches.map(record =>record.DBA))]
+  if(distinct_names.length === 0) return null;
+  if(distinct_names.length === 1)
+  {
+     matches.sort((a,b) => {
+    const dateA = new Date(a["INSPECTION DATE"] || 0);
+    const dateB = new Date(b["INSPECTION DATE"] || 0);
+    return dateB - dateA;
+
+    
+  });
+  return matches[0]
+  }
+  if(distinct_names.length > 1)
+  {
+  
+    const nameMatches = matches.filter(record => {
+      if (!record.DBA || !yelpName) return false;
+      return record.DBA.trim().toUpperCase() === yelpName.trim().toUpperCase();
+    });
+
+    // Step 2: Sort the matched records by INSPECTION DATE (newest first)
+    nameMatches.sort((a, b) => {
+      const dateA = new Date(a["INSPECTION DATE"] || 0);
+      const dateB = new Date(b["INSPECTION DATE"] || 0);
+      return dateB - dateA;
+    });
+
+    return nameMatches[0]; // returns matching records sorted newest -> oldest
+  }
+}
+  
 
 function findBestmatch(yelpAddress,dataset)
 {
