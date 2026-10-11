@@ -108,14 +108,15 @@ async function fecthjson()
     }
 }
 
-function findexactmatch(yelpaddress, dataset) {
+function filtermatch(yelpaddress, dataset) {
   if (!yelpaddress || !Array.isArray(dataset)) return null;
 
   // Exact string comparison
-  const matches = dataset.find(record => record.full_address === yelpaddress);
+  const matches = dataset.filter(record => record.full_address === yelpaddress);
 
   return matches || null;
 }
+
 
 function findBestmatch(yelpAddress,dataset)
 {
