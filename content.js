@@ -55,6 +55,27 @@ function getaddress()
 
 //console.log("[Restaurant Inspection] Detected Address:", extracted_address);
 
+function getname()
+{
+     const meta = document.querySelector('meta[name = "description"]');
+    if (!meta)
+    {
+        console.log("[Restaurant Inspector] Meta description tag not found")
+        return null;
+    }
+    const meta_text = meta.getAttribute("content");
+    const name = meta_text.split("-")[0];
+    let normalized_name = name.toUpperCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+   
+    console.log("[Restaurat Name] Deteced Name:",normalized_name)
+
+    return normalized_name;
+   
+}
+
+
 
 /* THIS IS A FUNCTION TOTEST THAT THE JSON WAS LOADED OR NOT  */
 async function fecthjson()
