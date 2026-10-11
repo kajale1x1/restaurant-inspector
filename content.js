@@ -186,13 +186,23 @@ async function loadmatched()
     const extracted_address =  getaddress();
     console.log("[Restaurant Inspection] Detected Address:", extracted_address);
 
+    const extracted_name = getname();
+    console.log("[Restaurat Name] Deteced Name:",extracted_name)
+
+
     const dataset = await fecthjson();
+
+    const filtered = filtermatch(extracted_address,dataset);
+    console.log("Here are all the avaiable matches",filtered);
+
+    const avaliable_matches = findalloptions(extracted_address,dataset,extracted_name);
+    console.log("Here are all the avaiable matches",avaliable_matches);
 
     const matched = findBestmatch(extracted_address,dataset);
     console.log("Matched Record", matched)
 
-    if (matched) {
-    const popup = createInspectionPopup(matched);
+    if (avaliable_matches) {
+    const popup = createInspectionPopup(avaliable_matches);
     if (popup) {
       document.body.appendChild(popup);
     }
